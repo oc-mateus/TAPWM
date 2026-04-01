@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Média</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f0f4f8; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+        .card { 
+            background-color: #ffffff; 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            text-align: center; 
+            max-width: 400px; 
+            width: 90%; 
+        }
+        h1 { color: #102a43; font-size: 1.5rem; margin-bottom: 1rem; }
+        p { color: #627d98; margin-bottom: 2rem; font-size: 0.95rem; }
+        button { 
+            background-color: #3e82f7; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: bold;
+            transition: background-color 0.3s ease; 
+        }
+        button:hover { background-color: #2b6cb0; }
+        #resultado { 
+            margin-top: 1.5rem; 
+            padding: 1rem;
+            background-color: #e6f7ff;
+            border-radius: 6px;
+            color: #035388;
+            font-weight: 500;
+            display: none; /* Escondido até ter um resultado */
+        }
+    </style>
+    <script src="Media.js" defer></script>
+</head>
+<body>
+    <div class="card">
+        <h1>Sistema de Notas</h1>
+        <p>Clique no botão abaixo para inserir as notas do aluno através das caixas de diálogo.</p>
+        <button onclick="calcularMedia()">Calcular Média</button>
+        <div id="resultado"></div>
+    </div>
+</body>
+</html>

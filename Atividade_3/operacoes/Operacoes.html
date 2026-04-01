@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operações Matemáticas</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f0f4f8; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+        .card { 
+            background-color: #ffffff; 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            text-align: center; 
+            max-width: 450px; 
+            width: 90%; 
+        }
+        h1 { color: #102a43; font-size: 1.5rem; margin-bottom: 1rem; }
+        p { color: #627d98; margin-bottom: 2rem; font-size: 0.95rem; }
+        button { 
+            background-color: #10b981; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: bold;
+            transition: background-color 0.3s ease; 
+        }
+        button:hover { background-color: #059669; }
+        #resultadoOperacoes { 
+            margin-top: 1.5rem; 
+            padding: 1.5rem;
+            background-color: #ecfdf5;
+            border-radius: 6px;
+            color: #065f46;
+            text-align: left;
+            font-family: monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            display: none; /* Escondido até ter um resultado */
+        }
+    </style>
+    <script src="Operacoes.js" defer></script>
+</head>
+<body>
+    <div class="card">
+        <h1>Calculadora de Operações</h1>
+        <p>Insira dois números para visualizar a soma, subtração, produto, divisão e o resto.</p>
+        <button onclick="realizarOperacoes()">Iniciar Cálculos</button>
+        <div id="resultadoOperacoes"></div>
+    </div>
+</body>
+</html>
