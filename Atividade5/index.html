@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Lançamento de Filme</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, button { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background-color: #007BFF; color: white; border: none; cursor: pointer; margin-top: 10px; border-radius: 4px; }
+        button:hover { background-color: #0056b3; }
+        .btn-relatorio { background-color: #28a745; }
+        .btn-relatorio:hover { background-color: #218838; }
+        #resultados { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 4px; display: none; }
+        .contador { text-align: center; margin-bottom: 15px; font-style: italic; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Pesquisa do Filme</h2>
+    
+    <div class="contador">
+        Total de pessoas registradas: <span id="contadorPessoas">0</span>/45
+    </div>
+
+    <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" min="1" required>
+    </div>
+
+    <div class="form-group">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo">
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outros">Outros</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="opiniao">Opinião sobre o filme:</label>
+        <select id="opiniao">
+            <option value="4">Ótimo (4)</option>
+            <option value="3">Bom (3)</option>
+            <option value="2">Regular (2)</option>
+            <option value="1">Péssimo (1)</option>
+        </select>
+    </div>
+
+    <button type="button" onclick="registrarResposta()">Registrar Resposta</button>
+    <button type="button" class="btn-relatorio" onclick="gerarRelatorio()">Gerar Relatório Final</button>
+
+    <div id="resultados">
+        <h3>Resultados da Pesquisa:</h3>
+        <p><strong>Média de idade:</strong> <span id="resMediaIdade"></span> anos</p>
+        <p><strong>Pessoa mais velha:</strong> <span id="resMaisVelha"></span> anos</p>
+        <p><strong>Pessoa mais nova:</strong> <span id="resMaisNova"></span> anos</p>
+        <p><strong>Qtd. de respostas "Péssimo":</strong> <span id="resPessimo"></span></p>
+        <p><strong>Porcentagem de "Ótimo" e "Bom":</strong> <span id="resPorcentagemOtimoBom"></span>%</p>
+        <p><strong>Participantes por sexo:</strong></p>
+        <ul>
+            <li>Mulheres: <span id="resMulheres"></span></li>
+            <li>Homens: <span id="resHomens"></span></li>
+            <li>Outros: <span id="resOutros"></span></li>
+        </ul>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
