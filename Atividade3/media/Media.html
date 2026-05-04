@@ -4,56 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cálculo de Média</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f0f4f8; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #0a1628, #1a365d, #0f2042);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .card { 
-            background-color: #ffffff; 
-            padding: 2.5rem; 
-            border-radius: 12px; 
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
-            text-align: center; 
-            max-width: 400px; 
-            width: 90%; 
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            animation: slideUp 0.6s ease;
         }
-        h1 { color: #102a43; font-size: 1.5rem; margin-bottom: 1rem; }
-        p { color: #627d98; margin-bottom: 2rem; font-size: 0.95rem; }
-        button { 
-            background-color: #3e82f7; 
-            color: white; 
-            border: none; 
-            padding: 12px 24px; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            font-weight: bold;
-            transition: background-color 0.3s ease; 
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        h1 { color: #e0e7ff; font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
         }
-        button:hover { background-color: #2b6cb0; }
-        #resultado { 
-            margin-top: 1.5rem; 
-            padding: 1rem;
-            background-color: #e6f7ff;
-            border-radius: 6px;
-            color: #035388;
-            font-weight: 500;
-            display: none; /* Escondido até ter um resultado */
+        .form-group label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            color: #e0e7ff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        input::placeholder { color: #4b5563; }
+        .notas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        button {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        button:active { transform: translateY(0); }
+        #resultado {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.4s ease;
+        }
+        .aprovado {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+        }
+        .reprovado {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+        .resultado-nome { font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
+        .resultado-media { font-size: 2rem; font-weight: 700; margin: 8px 0; }
+        .resultado-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .status-aprovado { background: rgba(34, 197, 94, 0.25); color: #4ade80; }
+        .status-reprovado { background: rgba(239, 68, 68, 0.25); color: #f87171; }
+        .error-msg {
+            display: none;
+            margin-top: 1rem;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            color: #fca5a5;
+            font-size: 0.9rem;
         }
     </style>
     <script src="Media.js" defer></script>
 </head>
 <body>
     <div class="card">
-        <h1>Sistema de Notas</h1>
-        <p>Clique no botão abaixo para inserir as notas do aluno através das caixas de diálogo.</p>
-        <button onclick="calcularMedia()">Calcular Média</button>
+        <h1>📚 Sistema de Notas</h1>
+        <p class="subtitle">Preencha os dados do aluno para calcular a média</p>
+        <div class="form-group">
+            <label for="nomeAluno">Nome do Aluno</label>
+            <input type="text" id="nomeAluno" placeholder="Ex: João Silva">
+        </div>
+        <div class="form-group">
+            <label>Notas (0 a 10)</label>
+            <div class="notas-grid">
+                <input type="number" id="nota1" placeholder="1ª Nota" min="0" max="10" step="0.1">
+                <input type="number" id="nota2" placeholder="2ª Nota" min="0" max="10" step="0.1">
+                <input type="number" id="nota3" placeholder="3ª Nota" min="0" max="10" step="0.1">
+            </div>
+        </div>
+        <button onclick="calcularMedia()">Calcular Média 📊</button>
+        <div id="erroMsg" class="error-msg"></div>
         <div id="resultado"></div>
     </div>
 </body>

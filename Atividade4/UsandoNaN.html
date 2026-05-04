@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jogo de Pedra, Papel ou Tesoura - Jogador vs Computador">
     <title>Pedra, Papel ou Tesoura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Partículas decorativas -->
-    <div class="particles" id="particles"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
     <main class="app">
-        <!-- Header -->
         <header class="header">
             <div class="logo">
-                <span class="logo-icon">🎮</span>
+                <span class="logo-icon">⚔️</span>
                 <h1>JO-KEN-PÔ!</h1>
             </div>
             <p class="tagline">Jogador vs Computador</p>
         </header>
 
-        <!-- Placar -->
         <section class="scores" id="scoreboard">
             <div class="score-box score-player" id="score-player-box">
                 <div class="score-avatar">🧑</div>
@@ -43,7 +45,6 @@
             </div>
         </section>
 
-        <!-- Arena -->
         <section class="arena" id="arena">
             <div class="arena-player" id="arena-player">
                 <div class="arena-hand" id="player-hand">
@@ -60,12 +61,10 @@
             </div>
         </section>
 
-        <!-- Resultado -->
         <div class="result-banner" id="result-banner">
             <p id="result-text">Faça sua jogada! 👇</p>
         </div>
 
-        <!-- Botões -->
         <section class="buttons" id="buttons">
             <button class="game-btn btn-rock" id="btn-pedra" data-choice="pedra">
                 <span class="btn-emoji">🪨</span>
@@ -84,14 +83,12 @@
             </button>
         </section>
 
-        <!-- Info -->
         <section class="info-bar">
             <button class="info-btn" id="rules-btn">📖 Regras</button>
             <button class="info-btn" id="history-btn">📊 Histórico</button>
             <button class="info-btn reset" id="reset-btn">🗑️ Zerar</button>
         </section>
 
-        <!-- Painel de Regras -->
         <div class="panel" id="rules-panel">
             <div class="panel-header">
                 <h2>📖 Regras</h2>
@@ -117,7 +114,6 @@
             </div>
         </div>
 
-        <!-- Painel de Histórico -->
         <div class="panel" id="history-panel">
             <div class="panel-header">
                 <h2>📊 Histórico</h2>

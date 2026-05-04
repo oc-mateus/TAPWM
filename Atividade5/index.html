@@ -4,69 +4,288 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisa de Lançamento de Filme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select, button { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { background-color: #007BFF; color: white; border: none; cursor: pointer; margin-top: 10px; border-radius: 4px; }
-        button:hover { background-color: #0056b3; }
-        .btn-relatorio { background-color: #28a745; }
-        .btn-relatorio:hover { background-color: #218838; }
-        #resultados { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 4px; display: none; }
-        .contador { text-align: center; margin-bottom: 15px; font-style: italic; color: #555; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #0c0c1d, #1a1a3e, #0f0f2e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 16px;
+            color: #e2e8f0;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f472b6, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+        .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #ec4899);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .counter {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .counter span { color: #a78bfa; font-weight: 700; font-size: 1rem; }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            color: #e0e7ff;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%2394a3b8'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+        select option { background: #1e1e3f; color: #e0e7ff; }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+        }
+        input::placeholder { color: #4b5563; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 0.5rem; }
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        button:hover { transform: translateY(-2px); }
+        button:active { transform: translateY(0); }
+        .btn-registrar {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+        }
+        .btn-registrar:hover { box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4); }
+        .btn-relatorio {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+        }
+        .btn-relatorio:hover { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+
+        /* Resultados */
+        #resultados {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-card.full { grid-column: 1 / -1; }
+        .stat-label { color: #64748b; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { color: #e2e8f0; font-size: 1.6rem; font-weight: 800; margin-top: 4px; }
+        .stat-value.accent-purple { color: #a78bfa; }
+        .stat-value.accent-pink { color: #f472b6; }
+        .stat-value.accent-green { color: #4ade80; }
+        .stat-value.accent-amber { color: #fbbf24; }
+        .stat-value.accent-red { color: #f87171; }
+
+        .gender-bars {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .gender-bar {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .gender-m { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.2); color: #93c5fd; }
+        .gender-f { background: rgba(244,114,182,0.12); border: 1px solid rgba(244,114,182,0.2); color: #f9a8d4; }
+        .gender-o { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.2); color: #c4b5fd; }
+        .gender-count { display: block; font-size: 1.4rem; font-weight: 800; }
+
+        .alert-msg {
+            display: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+            animation: fadeIn 0.3s ease;
+        }
+        .alert-success {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: #86efac;
+        }
+        .alert-error {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #fca5a5;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Pesquisa do Filme</h2>
-    
-    <div class="contador">
-        Total de pessoas registradas: <span id="contadorPessoas">0</span>/45
+    <div class="card">
+        <h2>🎬 Pesquisa do Filme</h2>
+        <p class="subtitle">Registre a opinião de cada espectador após a sessão</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="counter">
+            Respostas: <span id="contadorPessoas">0</span> / 45
+        </div>
+
+        <div class="form-group">
+            <label for="idade">Idade</label>
+            <input type="number" id="idade" min="1" max="120" placeholder="Ex: 25">
+        </div>
+
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="opiniao">Opinião sobre o filme</label>
+            <select id="opiniao">
+                <option value="4">⭐ Ótimo (4)</option>
+                <option value="3">👍 Bom (3)</option>
+                <option value="2">😐 Regular (2)</option>
+                <option value="1">👎 Péssimo (1)</option>
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn-registrar" onclick="registrarResposta()">Registrar</button>
+            <button type="button" class="btn-relatorio" onclick="gerarRelatorio()">Relatório</button>
+        </div>
+
+        <div id="alertMsg" class="alert-msg"></div>
     </div>
 
-    <div class="form-group">
-        <label for="idade">Idade:</label>
-        <input type="number" id="idade" min="1" required>
-    </div>
+    <div id="resultados" class="card">
+        <h2>📊 Resultados</h2>
+        <p class="subtitle" style="margin-bottom: 1rem;">Dados consolidados de todas as respostas</p>
 
-    <div class="form-group">
-        <label for="sexo">Sexo:</label>
-        <select id="sexo">
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
-            <option value="outros">Outros</option>
-        </select>
-    </div>
+        <div class="result-grid">
+            <div class="stat-card">
+                <div class="stat-label">Média de Idade</div>
+                <div class="stat-value accent-purple" id="resMediaIdade">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">% Ótimo + Bom</div>
+                <div class="stat-value accent-green" id="resPorcentagemOtimoBom">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mais Velha</div>
+                <div class="stat-value accent-amber" id="resMaisVelha">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Mais Nova</div>
+                <div class="stat-value accent-pink" id="resMaisNova">—</div>
+            </div>
+            <div class="stat-card full">
+                <div class="stat-label">Respostas "Péssimo"</div>
+                <div class="stat-value accent-red" id="resPessimo">—</div>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="opiniao">Opinião sobre o filme:</label>
-        <select id="opiniao">
-            <option value="4">Ótimo (4)</option>
-            <option value="3">Bom (3)</option>
-            <option value="2">Regular (2)</option>
-            <option value="1">Péssimo (1)</option>
-        </select>
-    </div>
-
-    <button type="button" onclick="registrarResposta()">Registrar Resposta</button>
-    <button type="button" class="btn-relatorio" onclick="gerarRelatorio()">Gerar Relatório Final</button>
-
-    <div id="resultados">
-        <h3>Resultados da Pesquisa:</h3>
-        <p><strong>Média de idade:</strong> <span id="resMediaIdade"></span> anos</p>
-        <p><strong>Pessoa mais velha:</strong> <span id="resMaisVelha"></span> anos</p>
-        <p><strong>Pessoa mais nova:</strong> <span id="resMaisNova"></span> anos</p>
-        <p><strong>Qtd. de respostas "Péssimo":</strong> <span id="resPessimo"></span></p>
-        <p><strong>Porcentagem de "Ótimo" e "Bom":</strong> <span id="resPorcentagemOtimoBom"></span>%</p>
-        <p><strong>Participantes por sexo:</strong></p>
-        <ul>
-            <li>Mulheres: <span id="resMulheres"></span></li>
-            <li>Homens: <span id="resHomens"></span></li>
-            <li>Outros: <span id="resOutros"></span></li>
-        </ul>
+        <label style="margin-bottom: 8px;">Participantes por Gênero</label>
+        <div class="gender-bars">
+            <div class="gender-bar gender-m">
+                <span class="gender-count" id="resHomens">0</span>
+                Homens
+            </div>
+            <div class="gender-bar gender-f">
+                <span class="gender-count" id="resMulheres">0</span>
+                Mulheres
+            </div>
+            <div class="gender-bar gender-o">
+                <span class="gender-count" id="resOutros">0</span>
+                Outros
+            </div>
+        </div>
     </div>
 </div>
 

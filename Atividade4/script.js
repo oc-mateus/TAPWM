@@ -16,7 +16,6 @@ const rulesBtn = document.getElementById('rules-btn');
 const historyBtn = document.getElementById('history-btn');
 const rulesPanel = document.getElementById('rules-panel');
 const historyPanel = document.getElementById('history-panel');
-const particlesContainer = document.getElementById('particles');
 
 // ===== Estado =====
 let playerScore = 0;
@@ -31,24 +30,6 @@ const emojis = {
     papel: '📄',
     tesoura: '✂️'
 };
-
-// ===== Partículas decorativas =====
-function criarParticulas() {
-    const cores = ['#7c3aed', '#ec4899', '#06b6d4', '#facc15', '#22c55e', '#f97316'];
-    for (let i = 0; i < 20; i++) {
-        const p = document.createElement('div');
-        p.classList.add('particle');
-        const size = Math.random() * 6 + 3;
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.background = cores[Math.floor(Math.random() * cores.length)];
-        p.style.animationDuration = (Math.random() * 12 + 8) + 's';
-        p.style.animationDelay = (Math.random() * 10) + 's';
-        particlesContainer.appendChild(p);
-    }
-}
-criarParticulas();
 
 // ===== Fase B: Escolha do computador =====
 // Math.floor((Math.random() * 3) + 1) conforme enunciado

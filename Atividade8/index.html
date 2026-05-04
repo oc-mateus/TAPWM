@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios JavaScript</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #0a0a14, #1a0f2e, #0d0d1a);
+            min-height: 100vh;
+            padding: 30px 16px;
+            color: #e5e7eb;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s ease;
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f472b6, #fb923c, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p { color: #6b7280; font-size: 0.9rem; margin-top: 4px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .exercises {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .exercise-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 28px;
+            animation: fadeIn 0.6s ease backwards;
+        }
+        .exercise-card:nth-child(1) { animation-delay: 0.1s; }
+        .exercise-card:nth-child(2) { animation-delay: 0.2s; }
+        .exercise-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .card-icon { font-size: 1.8rem; }
+        .card-header h2 { font-size: 1.15rem; font-weight: 700; color: #f3f4f6; }
+        .card-desc { color: #6b7280; font-size: 0.85rem; margin-bottom: 18px; line-height: 1.5; }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: flex-end;
+        }
+        .form-col {
+            flex: 1;
+        }
+        .form-col label {
+            display: block;
+            color: #9ca3af;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            color: #e5e7eb;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        select { appearance: none; -webkit-appearance: none; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%239ca3af'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
+        }
+        select option { background: #1e1b30; color: #e5e7eb; }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        }
+        input::placeholder { color: #374151; }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
+        .btn-orange { background: linear-gradient(135deg, #ea580c, #f97316); }
+        .btn-orange:hover { box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35); }
+        .btn-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+        .btn-purple:hover { box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35); }
+        .btn-rose { background: linear-gradient(135deg, #be123c, #e11d48); }
+        .btn-rose:hover { box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35); }
+
+        .result-area {
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .result-area.show { display: block; }
+
+        /* Soma / Quadrado */
+        .sum-display {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .sum-card {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+        }
+        .sum-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+        .sum-value { font-size: 1.5rem; font-weight: 800; margin-top: 4px; }
+        .sum-orange { background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2); color: #fdba74; }
+        .sum-purple { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2); color: #c4b5fd; }
+
+        /* Números gerados */
+        .numbers-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .num-tag {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #d1d5db;
+        }
+
+        /* Gerador de palavras */
+        .word-result {
+            text-align: center;
+            padding: 20px;
+        }
+        .generated-word {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+        .word-meta { color: #6b7280; font-size: 0.8rem; }
+
+        /* Tabela de série */
+        .series-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .series-table th, .series-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.85rem;
+        }
+        .series-table th {
+            color: #9ca3af;
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .series-table td { color: #d1d5db; }
+        .series-table tr:last-child td { border-bottom: none; }
+        .series-total { color: #fbbf24 !important; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1>🧪 Exercícios JavaScript</h1>
+        <p>Soma de séries, cálculos matemáticos e gerador de palavras aleatórias</p>
+    </div>
+
+    <div class="exercises">
+        <!-- 1. Calcular Soma e Quadrado de uma Série -->
+        <div class="exercise-card">
+            <div class="card-header">
+                <span class="card-icon">🔢</span>
+                <h2>Soma e Quadrado de Série Numérica</h2>
+            </div>
+            <p class="card-desc">Informe um número N e calcule a soma (1 + 2 + ... + N) e a soma dos quadrados (1² + 2² + ... + N²).</p>
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="numSerie">Valor de N</label>
+                    <input type="number" id="numSerie" placeholder="Ex: 10" min="1">
+                </div>
+            </div>
+            <button class="btn btn-orange" onclick="calcularSerie()">Calcular Série</button>
+            <div class="result-area" id="resultSerie"></div>
+        </div>
+
+        <!-- 2. Gerador de Números com Critério -->
+        <div class="exercise-card">
+            <div class="card-header">
+                <span class="card-icon">🎲</span>
+                <h2>Gerador de Números com Filtro</h2>
+            </div>
+            <p class="card-desc">Gera N números aleatórios e filtra apenas os pares, ímpares, ou acima de um valor.</p>
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="qtdNumeros">Quantidade</label>
+                    <input type="number" id="qtdNumeros" placeholder="Ex: 20" min="1" max="100">
+                </div>
+                <div class="form-col">
+                    <label for="maxNum">Máximo</label>
+                    <input type="number" id="maxNum" placeholder="Ex: 100" min="1">
+                </div>
+                <div class="form-col">
+                    <label for="filtroTipo">Filtro</label>
+                    <select id="filtroTipo">
+                        <option value="todos">Todos</option>
+                        <option value="pares">Pares</option>
+                        <option value="impares">Ímpares</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-purple" onclick="gerarNumeros()">Gerar Números</button>
+            <div class="result-area" id="resultNumeros"></div>
+        </div>
+
+        <!-- 3. Gerador de Palavras Aleatórias -->
+        <div class="exercise-card">
+            <div class="card-header">
+                <span class="card-icon">✍️</span>
+                <h2>Gerador de Palavras Aleatórias</h2>
+            </div>
+            <p class="card-desc">Gera uma palavra aleatória com o número de letras especificado. Usa consoantes e vogais.</p>
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="tamPalavra">Nº de Letras</label>
+                    <input type="number" id="tamPalavra" placeholder="Ex: 8" min="1" max="30">
+                </div>
+                <div class="form-col">
+                    <label for="qtdPalavras">Quantidade</label>
+                    <input type="number" id="qtdPalavras" placeholder="Ex: 5" min="1" max="20">
+                </div>
+            </div>
+            <button class="btn btn-rose" onclick="gerarPalavras()">Gerar Palavras</button>
+            <div class="result-area" id="resultPalavras"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

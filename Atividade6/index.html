@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Triângulo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #0d1117, #161b22, #0d1117);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #e6edf3;
+        }
+        .container {
+            max-width: 520px;
+            width: 100%;
+            animation: fadeIn 0.7s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 16px;
+        }
+        .header-icon { font-size: 2.5rem; text-align: center; margin-bottom: 12px; }
+        h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f97316, #ef4444, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+        .subtitle { text-align: center; color: #64748b; font-size: 0.88rem; margin-bottom: 2rem; }
+
+        .sides-input {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .side-group {
+            text-align: center;
+        }
+        .side-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 14px 8px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            color: #e6edf3;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
+        }
+        input::placeholder { color: #374151; font-weight: 400; }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f97316, #ef4444);
+            color: white;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+        }
+        button:active { transform: translateY(0); }
+
+        /* Triangle Canvas */
+        .triangle-display {
+            display: none;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.4s ease;
+        }
+        .triangle-canvas-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        canvas {
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .result-badge {
+            text-align: center;
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
+        .result-badge .type-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .result-badge .type-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        .badge-equilatero {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #86efac;
+        }
+        .badge-isosceles {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #93c5fd;
+        }
+        .badge-escaleno {
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            color: #fde68a;
+        }
+        .badge-invalido {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.9rem;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: #64748b; }
+        .info-value { color: #e6edf3; font-weight: 600; }
+
+        .error-msg {
+            display: none;
+            margin-top: 1rem;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 10px;
+            color: #fca5a5;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header-icon">🔺</div>
+            <h1>Verificador de Triângulo</h1>
+            <p class="subtitle">Informe os três lados para classificar o triângulo</p>
+
+            <div class="sides-input">
+                <div class="side-group">
+                    <span class="side-label">Lado A</span>
+                    <input type="number" id="ladoA" placeholder="0" min="0.1" step="any">
+                </div>
+                <div class="side-group">
+                    <span class="side-label">Lado B</span>
+                    <input type="number" id="ladoB" placeholder="0" min="0.1" step="any">
+                </div>
+                <div class="side-group">
+                    <span class="side-label">Lado C</span>
+                    <input type="number" id="ladoC" placeholder="0" min="0.1" step="any">
+                </div>
+            </div>
+
+            <button onclick="verificarTriangulo()">Verificar Triângulo ✨</button>
+            <div id="erroMsg" class="error-msg"></div>
+
+            <div class="triangle-display" id="triangleDisplay">
+                <div class="triangle-canvas-wrap">
+                    <canvas id="triangleCanvas" width="250" height="200"></canvas>
+                </div>
+                <div id="resultBadge" class="result-badge"></div>
+                <div id="infoRows"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

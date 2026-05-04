@@ -1,41 +1,61 @@
 function realizarOperacoes() {
-    let iniciarOperacoes = confirm("Deseja realizar as operações matemáticas com dois números?");
+    const input1 = document.getElementById('num1');
+    const input2 = document.getElementById('num2');
+    const erroDiv = document.getElementById('erroMsg');
+    const resultDiv = document.getElementById('resultadoOperacoes');
 
-    if (iniciarOperacoes) {
-        let num1 = parseFloat(prompt("Digite o primeiro número:"));
-        let num2 = parseFloat(prompt("Digite o segundo número:"));
+    const num1 = parseFloat(input1.value);
+    const num2 = parseFloat(input2.value);
 
-        if (isNaN(num1) || isNaN(num2)) {
-            alert("Erro: Por favor, insira apenas números válidos.");
-            return;
-        }
+    // Limpar erro anterior
+    erroDiv.style.display = 'none';
 
-        let soma = num1 + num2;
-        let subtracao = num1 - num2;
-        let produto = num1 * num2;
-        let divisao = (num2 !== 0) ? (num1 / num2).toFixed(2) : "Indefinida (divisão por zero)";
-        let resto = (num2 !== 0) ? (num1 % num2) : "Indefinido";
-
-        let mensagem = "Resultados para " + num1 + " e " + num2 + ":\n\n" +
-                       "Soma: " + soma + "\n" +
-                       "Subtração: " + subtracao + "\n" +
-                       "Produto: " + produto + "\n" +
-                       "Divisão: " + divisao + "\n" +
-                       "Resto: " + resto;
-
-        alert(mensagem);
-
-        let mensagemHTML = `<strong>Resultados para ${num1} e ${num2}:</strong><br><br>
-                            Soma: ${soma} <br>
-                            Subtração: ${subtracao} <br>
-                            Produto: ${produto} <br>
-                            Divisão: ${divisão} <br>
-                            Resto: ${resto}`;
-
-        let divResultado = document.getElementById("resultadoOperacoes");
-        divResultado.innerHTML = mensagemHTML;
-        divResultado.style.display = "block";
-    } else {
-        alert("Operação cancelada.");
+    // Validação com isNaN
+    if (isNaN(num1) || isNaN(num2)) {
+        erroDiv.textContent = '⚠️ Por favor, insira números válidos nos dois campos.';
+        erroDiv.style.display = 'block';
+        resultDiv.style.display = 'none';
+        return;
     }
+
+    const soma = num1 + num2;
+    const subtracao = num1 - num2;
+    const produto = num1 * num2;
+    const divisao = (num2 !== 0) ? (num1 / num2).toFixed(4) : "∞ (divisão por zero)";
+    const resto = (num2 !== 0) ? (num1 % num2).toFixed(4) : "Indefinido";
+    const potencia = Math.pow(num1, num2).toFixed(4);
+
+    resultDiv.innerHTML = `
+        <div class="result-header">Resultados para ${num1} e ${num2}</div>
+        <div class="result-row">
+            <span class="result-label">➕ Soma</span>
+            <span class="result-value">${soma}</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">➖ Subtração</span>
+            <span class="result-value">${subtracao}</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">✖️ Produto</span>
+            <span class="result-value">${produto}</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">➗ Divisão</span>
+            <span class="result-value">${divisao}</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">🔄 Resto</span>
+            <span class="result-value">${resto}</span>
+        </div>
+        <div class="result-row">
+            <span class="result-label">⚡ Potência (a^b)</span>
+            <span class="result-value">${potencia}</span>
+        </div>
+    `;
+    resultDiv.style.display = 'block';
 }
+
+// Permitir calcular com Enter
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') realizarOperacoes();
+});

@@ -4,59 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Operações Matemáticas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f0f4f8; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .card { 
-            background-color: #ffffff; 
-            padding: 2.5rem; 
-            border-radius: 12px; 
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
-            text-align: center; 
-            max-width: 450px; 
-            width: 90%; 
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 0.6s ease;
         }
-        h1 { color: #102a43; font-size: 1.5rem; margin-bottom: 1rem; }
-        p { color: #627d98; margin-bottom: 2rem; font-size: 0.95rem; }
-        button { 
-            background-color: #10b981; 
-            color: white; 
-            border: none; 
-            padding: 12px 24px; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            font-size: 1rem; 
-            font-weight: bold;
-            transition: background-color 0.3s ease; 
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        h1 {
+            color: #e0e7ff;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
         }
-        button:hover { background-color: #059669; }
-        #resultadoOperacoes { 
-            margin-top: 1.5rem; 
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 1.8rem;
+            font-size: 0.9rem;
+        }
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+        input[type="number"] {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            color: #e0e7ff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+        }
+        input[type="number"]::placeholder { color: #64748b; }
+        button {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.3s;
+            letter-spacing: 0.3px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+        button:active { transform: translateY(0); }
+        #resultadoOperacoes {
+            margin-top: 1.5rem;
             padding: 1.5rem;
-            background-color: #ecfdf5;
-            border-radius: 6px;
-            color: #065f46;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
             text-align: left;
-            font-family: monospace;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            display: none; /* Escondido até ter um resultado */
+            font-size: 0.95rem;
+            line-height: 2;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #c4b5fd;
+        }
+        .result-row:last-child { border-bottom: none; }
+        .result-label { color: #94a3b8; font-weight: 500; }
+        .result-value { color: #e0e7ff; font-weight: 700; font-size: 1.05rem; }
+        .result-header {
+            color: #a78bfa;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .error-msg {
+            display: none;
+            margin-top: 1rem;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            color: #fca5a5;
+            font-size: 0.9rem;
+            animation: fadeIn 0.3s ease;
         }
     </style>
     <script src="Operacoes.js" defer></script>
 </head>
 <body>
     <div class="card">
-        <h1>Calculadora de Operações</h1>
-        <p>Insira dois números para visualizar a soma, subtração, produto, divisão e o resto.</p>
-        <button onclick="realizarOperacoes()">Iniciar Cálculos</button>
+        <h1>🧮 Calculadora Interativa</h1>
+        <p class="subtitle">Insira dois números para ver todas as operações</p>
+        <div class="input-group">
+            <input type="number" id="num1" placeholder="Número 1" step="any">
+            <input type="number" id="num2" placeholder="Número 2" step="any">
+        </div>
+        <button onclick="realizarOperacoes()">Calcular ✨</button>
+        <div id="erroMsg" class="error-msg"></div>
         <div id="resultadoOperacoes"></div>
     </div>
 </body>

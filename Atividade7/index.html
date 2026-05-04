@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções JavaScript</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(170deg, #030712, #111827, #030712);
+            min-height: 100vh;
+            padding: 30px 16px;
+            color: #e5e7eb;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s ease;
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #22d3ee, #818cf8, #e879f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p { color: #6b7280; font-size: 0.9rem; margin-top: 4px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 16px;
+        }
+        .func-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 24px;
+            transition: border-color 0.3s;
+            animation: fadeIn 0.6s ease backwards;
+        }
+        .func-card:nth-child(1) { animation-delay: 0.1s; }
+        .func-card:nth-child(2) { animation-delay: 0.2s; }
+        .func-card:nth-child(3) { animation-delay: 0.3s; }
+        .func-card:nth-child(4) { animation-delay: 0.4s; }
+        .func-card:nth-child(5) { animation-delay: 0.5s; }
+        .func-card:hover { border-color: rgba(255,255,255,0.15); }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .card-icon { font-size: 1.5rem; }
+        .card-title h2 { font-size: 1.1rem; font-weight: 700; color: #f3f4f6; }
+        .card-desc { color: #6b7280; font-size: 0.82rem; margin-bottom: 16px; line-height: 1.5; }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"] {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            color: #e5e7eb;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+        }
+        input::placeholder { color: #374151; }
+
+        .btn {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); }
+        .btn-cyan { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .btn-cyan:hover { box-shadow: 0 6px 20px rgba(6, 182, 212, 0.3); }
+        .btn-indigo { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .btn-indigo:hover { box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3); }
+        .btn-pink { background: linear-gradient(135deg, #db2777, #ec4899); }
+        .btn-pink:hover { box-shadow: 0 6px 20px rgba(236, 72, 153, 0.3); }
+        .btn-amber { background: linear-gradient(135deg, #d97706, #f59e0b); }
+        .btn-amber:hover { box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3); }
+        .btn-emerald { background: linear-gradient(135deg, #059669, #10b981); }
+        .btn-emerald:hover { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3); }
+
+        .result-box {
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            min-height: 44px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .result-box.show { display: block; }
+        .result-text { color: #d1d5db; font-size: 0.9rem; line-height: 1.6; }
+        .result-text strong { color: #f3f4f6; }
+        .result-highlight {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .hl-cyan { background: rgba(34,211,238,0.15); color: #67e8f9; }
+        .hl-indigo { background: rgba(129,140,248,0.15); color: #a5b4fc; }
+        .hl-pink { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+        .hl-amber { background: rgba(245,158,11,0.15); color: #fcd34d; }
+        .hl-emerald { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1>⚡ Funções JavaScript</h1>
+        <p>Exercícios com funções: maior, ordenação, palíndromo, subconjunto e dia da semana</p>
+    </div>
+
+    <div class="grid">
+        <!-- 1. Maior de Três -->
+        <div class="func-card">
+            <div class="card-title">
+                <span class="card-icon">🏆</span>
+                <h2>Maior de Três Números</h2>
+            </div>
+            <p class="card-desc">Informe 3 números e descubra qual é o maior usando uma função.</p>
+            <div class="input-row">
+                <input type="number" id="m1" placeholder="1º">
+                <input type="number" id="m2" placeholder="2º">
+                <input type="number" id="m3" placeholder="3º">
+            </div>
+            <button class="btn btn-cyan" onclick="encontrarMaior()">Descobrir Maior</button>
+            <div class="result-box" id="resultMaior"></div>
+        </div>
+
+        <!-- 2. Ordenar Três -->
+        <div class="func-card">
+            <div class="card-title">
+                <span class="card-icon">📊</span>
+                <h2>Ordenar Três Números</h2>
+            </div>
+            <p class="card-desc">Informe 3 números e veja-os ordenados de forma crescente e decrescente.</p>
+            <div class="input-row">
+                <input type="number" id="o1" placeholder="1º">
+                <input type="number" id="o2" placeholder="2º">
+                <input type="number" id="o3" placeholder="3º">
+            </div>
+            <button class="btn btn-indigo" onclick="ordenarNumeros()">Ordenar</button>
+            <div class="result-box" id="resultOrdenar"></div>
+        </div>
+
+        <!-- 3. Palíndromo -->
+        <div class="func-card">
+            <div class="card-title">
+                <span class="card-icon">🔄</span>
+                <h2>Verificar Palíndromo</h2>
+            </div>
+            <p class="card-desc">Digite uma palavra e verifique se é um palíndromo (lê-se igual de trás pra frente).</p>
+            <div class="input-row">
+                <input type="text" id="palavraPalin" placeholder="Ex: arara, ovo, radar">
+            </div>
+            <button class="btn btn-pink" onclick="verificarPalindromo()">Verificar</button>
+            <div class="result-box" id="resultPalindromo"></div>
+        </div>
+
+        <!-- 4. Subconjunto -->
+        <div class="func-card">
+            <div class="card-title">
+                <span class="card-icon">🧩</span>
+                <h2>Verificar Subconjunto</h2>
+            </div>
+            <p class="card-desc">Informe dois conjuntos separados por vírgula. Verifica se o 1º é subconjunto do 2º.</p>
+            <div class="input-row">
+                <input type="text" id="conjA" placeholder="Ex: 1,2,3">
+            </div>
+            <div class="input-row">
+                <input type="text" id="conjB" placeholder="Ex: 1,2,3,4,5">
+            </div>
+            <button class="btn btn-amber" onclick="verificarSubconjunto()">Verificar</button>
+            <div class="result-box" id="resultSubconjunto"></div>
+        </div>
+
+        <!-- 5. Dia da Semana -->
+        <div class="func-card">
+            <div class="card-title">
+                <span class="card-icon">📅</span>
+                <h2>Dia da Semana</h2>
+            </div>
+            <p class="card-desc">Informe um número de 1 a 7 e descubra o dia da semana correspondente.</p>
+            <div class="input-row">
+                <input type="number" id="numDia" placeholder="1 a 7" min="1" max="7">
+            </div>
+            <button class="btn btn-emerald" onclick="diaDaSemana()">Descobrir</button>
+            <div class="result-box" id="resultDia"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
