@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 36px;
+}
+
+#janela {
+  width: 300px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#janela:hover {
+  transform: scale(1.05);
+}
+
+p {
+  margin-top: 20px;
+  color: #555;
+  font-size: 16px;
+}
