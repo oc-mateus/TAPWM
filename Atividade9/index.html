@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <meta name="description" content="Descubra seu Índice de Massa Corporal com precisão científica. Calculadora de IMC online gratuita.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/tapwm-theme.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-inner">
+                <div class="nav-logo">Índice<span>Saúde</span></div>
+
+                <div class="nav-links" id="nav-links">
+                    <a href="#calculadora" class="nav-link active">Calculadora IMC</a>
+                    <a href="#sobre" class="nav-link">Sobre o IMC</a>
+                    <a href="#classificacao" class="nav-link">Classificação</a>
+                </div>
+
+                <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+                    <svg class="icon-menu" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg class="icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu hidden" id="mobile-menu">
+            <div class="mobile-menu-inner">
+                <a href="#calculadora" class="mobile-link active">Calculadora IMC</a>
+                <a href="#sobre" class="mobile-link">Sobre o IMC</a>
+                <a href="#classificacao" class="mobile-link">Classificação</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+
+            <header class="site-header animate-fade-in" id="calculadora">
+                <div class="header-inner">
+                    <div class="header-badge">SAÚDE × PRECISÃO</div>
+                    <h1>Calculadora de <span>IMC</span></h1>
+                    <p>Descubra seu Índice de Massa Corporal com precisão científica</p>
+                </div>
+            </header>
+
+            <div class="calc-row">
+                <div class="form-panel animate-slide-up">
+                    <form id="imc-form" novalidate>
+                        <div class="field-group">
+                            <div class="field-label-row">
+                                <svg class="field-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.0002 6L11.0064 9M16.5 6C17.8978 6 18.5967 6 19.1481 6.22836C19.8831 6.53284 20.4672 7.11687 20.7716 7.85195C21 8.40326 21 9.10218 21 10.5V16.2C21 17.8802 21 18.7202 20.673 19.362C20.3854 19.9265 19.9265 20.3854 19.362 20.673C18.7202 21 17.8802 21 16.2 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V10.5C3 9.10218 3 8.40326 3.22836 7.85195C3.53284 7.11687 4.11687 6.53284 4.85195 6.22836C5.40326 6 6.10218 6 7.5 6M10 17H14M10.5415 3H13.4588C14.5397 3 15.0802 3 15.4802 3.18541C16.0136 3.43262 16.4112 3.90199 16.5674 4.46878C16.6845 4.89387 16.5957 5.42698 16.418 6.4932C16.2862 7.28376 16.2203 7.67904 16.0449 7.98778C15.8111 8.39944 15.4388 8.71481 14.9943 8.87778C14.661 9 14.2602 9 13.4588 9H10.5415C9.74006 9 9.33933 9 9.00596 8.87778C8.56146 8.71481 8.18918 8.39944 7.95536 7.98778C7.77999 7.67904 7.71411 7.28376 7.58235 6.4932C7.40465 5.42698 7.3158 4.89387 7.43291 4.46878C7.58906 3.90199 7.98669 3.43262 8.52009 3.18541C8.92014 3 9.46061 3 10.5415 3Z"/>
+                                </svg>
+                                <label for="peso" class="field-label">Peso</label>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="number" id="peso" step="0.1" placeholder="0" min="1" max="500">
+                                <span class="unit">kg</span>
+                            </div>
+                            <p class="field-error hidden" id="peso-error">Por favor, insira um peso válido</p>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-label-row">
+                                <svg class="field-icon" fill="currentColor" viewBox="0 0 512 512">
+                                    <path d="M315.429,146.286h-4.937c8.722-9.719,14.08-22.51,14.08-36.571c0-30.254-24.603-54.857-54.857-54.857s-54.857,24.603-54.857,54.857c0,14.062,5.358,26.853,14.08,36.571H224c-25.207,0-45.714,20.507-45.714,45.714v128c0,5.047,4.087,9.143,9.143,9.143h27.429v173.714c0,5.047,4.087,9.143,9.143,9.143h45.714h9.143c25.207,0,45.714-20.507,45.714-45.714V329.143H352c5.056,0,9.143-4.096,9.143-9.143V192C361.143,166.793,340.635,146.286,315.429,146.286z M269.714,73.143c20.169,0,36.571,16.402,36.571,36.571s-16.402,36.571-36.571,36.571s-36.571-16.402-36.571-36.571S249.545,73.143,269.714,73.143z M275.319,164.571l-5.605,16.805l-5.605-16.805H275.319z M342.857,310.857h-18.286V192h-18.286v274.286c0,15.122-12.306,27.429-27.429,27.429V329.143h-18.286v164.571h-27.429V192h-18.286v118.857h-18.286V192c0-15.122,12.306-27.429,27.429-27.429h20.846l16.201,48.603c1.243,3.739,4.727,6.254,8.667,6.254s7.424-2.514,8.667-6.254l16.201-48.603h20.846c15.122,0,27.429,12.306,27.429,27.429V310.857z"/>
+                                    <path d="M150.857,0H59.429c-5.056,0-9.143,4.096-9.143,9.143v493.714c0,5.047,4.087,9.143,9.143,9.143h91.429c5.056,0,9.143-4.096,9.143-9.143V9.143C160,4.096,155.913,0,150.857,0z M141.714,54.857h-18.286v18.286h18.286v36.571h-36.571V128h36.571v36.571h-18.286v18.286h18.286v36.571h-36.571v18.286h36.571v36.571h-18.286v18.286h18.286v36.571h-36.571v18.286h36.571V384h-18.286v18.286h18.286v36.571h-36.571v18.286h36.571v36.571H68.571V18.286h73.143V54.857z"/>
+                                </svg>
+                                <label for="altura" class="field-label">Altura</label>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="number" id="altura" step="1" placeholder="0" min="1" max="300">
+                                <span class="unit">cm</span>
+                            </div>
+                            <p class="field-error hidden" id="altura-error">Por favor, insira uma altura válida</p>
+                        </div>
+
+                        <button type="submit" id="calcular-btn" class="btn-calcular">
+                            <span>Calcular IMC</span>
+                            <div class="btn-overlay"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="result-panel" id="result-panel">
+                    <div class="result-empty" id="result-empty">
+                        <div class="empty-icon-box">
+                            <div class="empty-dot"></div>
+                        </div>
+                        <p class="empty-text">Insira seu peso e altura para calcular o IMC</p>
+                    </div>
+
+                    <div class="result-filled hidden" id="result-filled">
+                        <div class="result-header">
+                            <div class="result-label-top">SEU RESULTADO</div>
+                            <div class="result-imc-value" id="result-imc-value">--</div>
+                            <div class="result-categoria" id="result-categoria">--</div>
+                        </div>
+
+                        <div class="result-bar-section">
+                            <div class="progress-track">
+                                <div class="progress-segments">
+                                    <div class="seg seg-blue"></div>
+                                    <div class="seg seg-green"></div>
+                                    <div class="seg seg-yellow"></div>
+                                    <div class="seg seg-red"></div>
+                                </div>
+                                <div class="progress-indicator" id="progress-indicator">
+                                    <div class="indicator-diamond"></div>
+                                </div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>&lt;18.5</span>
+                                <span>18.5-24.9</span>
+                                <span>25-29.9</span>
+                                <span>≥30</span>
+                            </div>
+                        </div>
+
+                        <p class="result-description" id="result-description"></p>
+
+                        <div class="ref-table-box">
+                            <h3 class="ref-table-title">Referência IMC</h3>
+                            <div class="ref-table-rows">
+                                <div class="ref-row" id="ref-abaixo">
+                                    <span class="ref-name">Abaixo do peso</span>
+                                    <span class="ref-range">&lt; 18.5</span>
+                                </div>
+                                <div class="ref-row" id="ref-normal">
+                                    <span class="ref-name">Peso normal</span>
+                                    <span class="ref-range">18.5 - 24.9</span>
+                                </div>
+                                <div class="ref-row" id="ref-sobrepeso">
+                                    <span class="ref-name">Sobrepeso</span>
+                                    <span class="ref-range">25.0 - 29.9</span>
+                                </div>
+                                <div class="ref-row ref-row-last" id="ref-obesidade">
+                                    <span class="ref-name">Obesidade</span>
+                                    <span class="ref-range">≥ 30.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-sections" id="sobre">
+
+                <section class="info-section animate-fade-in">
+                    <div class="section-meta">
+                        <div class="section-tag">CONCEITO</div>
+                        <h2 class="section-title">O que é o <span>IMC</span></h2>
+                    </div>
+                    <div class="section-body">
+                        <p>O <strong>Índice de Massa Corporal (IMC)</strong> é uma medida internacional usada para calcular se uma pessoa está no peso ideal. É calculado dividindo o peso (em quilos) pela altura (em metros) elevada ao quadrado.</p>
+                        <div class="formula-box">
+                            <p class="formula-label">FÓRMULA</p>
+                            <p class="formula-text">IMC = Peso (kg) ÷ Altura² (m)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="info-section animate-fade-in" id="classificacao">
+                    <div class="section-meta">
+                        <div class="section-tag">CLASSIFICAÇÃO</div>
+                        <h2 class="section-title">Interpretação dos <span>resultados</span></h2>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>CLASSIFICAÇÃO</th>
+                                    <th>IMC (kg/m²)</th>
+                                    <th>RECOMENDAÇÃO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="dot dot-blue"></span><strong>Abaixo do peso</strong></td>
+                                    <td class="range-blue">&lt; 18,5</td>
+                                    <td class="rec-text">Consulte um nutricionista</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="dot dot-green"></span><strong>Peso normal</strong></td>
+                                    <td class="range-green">18,5 - 24,9</td>
+                                    <td class="rec-text">Mantenha hábitos saudáveis</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="dot dot-yellow"></span><strong>Sobrepeso</strong></td>
+                                    <td class="range-yellow">25,0 - 29,9</td>
+                                    <td class="rec-text">Adote dieta balanceada</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="dot dot-red"></span><strong>Obesidade</strong></td>
+                                    <td class="range-red">≥ 30,0</td>
+                                    <td class="rec-text">Procure orientação médica</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="info-section animate-fade-in">
+                    <div class="section-meta">
+                        <div class="section-tag">IMPORTANTE</div>
+                        <h2 class="section-title">Limitações do <span>IMC</span></h2>
+                    </div>
+                    <div class="alert-box alert-orange">
+                        <p class="alert-tag">AVISO</p>
+                        <p class="alert-text">O IMC é uma ferramenta de triagem, não um diagnóstico definitivo da saúde ou gordura corporal.</p>
+                    </div>
+                    <div class="limitations-grid">
+                        <div class="limitation-col">
+                            <h3>O IMC não considera</h3>
+                            <ul>
+                                <li><span class="dash">—</span><span><strong>Composição corporal:</strong> Músculos vs gordura</span></li>
+                                <li><span class="dash">—</span><span><strong>Distribuição:</strong> Localização da gordura</span></li>
+                                <li><span class="dash">—</span><span><strong>Idade e sexo:</strong> Diferenças metabólicas</span></li>
+                            </ul>
+                        </div>
+                        <div class="limitation-col">
+                            <h3>Casos especiais</h3>
+                            <ul>
+                                <li><span class="dash">—</span><span><strong>Atletas:</strong> IMC alto por massa muscular</span></li>
+                                <li><span class="dash">—</span><span><strong>Idosos:</strong> Avaliação diferenciada</span></li>
+                                <li><span class="dash">—</span><span><strong>Gestantes:</strong> Acompanhamento especializado</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="info-section animate-fade-in">
+                    <div class="section-meta">
+                        <div class="section-tag">RECOMENDAÇÕES</div>
+                        <h2 class="section-title">Mantenha um peso <span>saudável</span></h2>
+                    </div>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon"><div class="tip-dot"></div></div>
+                            <h3>Alimentação</h3>
+                            <ul>
+                                <li>Dieta balanceada e variada</li>
+                                <li>Controle das porções</li>
+                                <li>Reduza açúcares</li>
+                                <li>Beba bastante água</li>
+                            </ul>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><div class="tip-dot"></div></div>
+                            <h3>Exercícios</h3>
+                            <ul>
+                                <li>150min semanais</li>
+                                <li>Cardio + musculação</li>
+                                <li>Atividades prazerosas</li>
+                                <li>Seja consistente</li>
+                            </ul>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><div class="tip-dot"></div></div>
+                            <h3>Estilo de Vida</h3>
+                            <ul>
+                                <li>Durma 7-9 horas</li>
+                                <li>Gerencie o estresse</li>
+                                <li>Evite dietas extremas</li>
+                                <li>Apoio profissional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="medical-alert">
+                    <div class="alert-box alert-red text-center">
+                        <p class="alert-tag">AVISO MÉDICO</p>
+                        <p class="alert-text">Esta calculadora é apenas uma ferramenta informativa. Para uma avaliação completa da sua saúde, <strong>sempre consulte um médico ou nutricionista qualificado</strong>.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="site-footer animate-fade-in">
+                <p>© 2025 Calculadora de IMC | Desenvolvido por Vinícius Ribeiro Lopes</p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

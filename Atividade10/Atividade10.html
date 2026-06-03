@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de criar objetos</title>
+    <link rel="stylesheet" href="../assets/tapwm-theme.css">
+</head>
+<body>
+    <h1>Atividade 10</h1>
+</body>
+
+<script>
+    alert(`Aluno 1`);
+    //Forma 1: Usando Object
+    var aluno1 = new Object();
+    //usando Object
+    aluno1.nome = 'Eduardo';
+    aluno1.ra = '1234567890';
+    alert(`O aluno ${aluno1.nome} tem o RA ${aluno1.ra}`);
+
+
+    alert(`Aluno 2`);
+    var aluno2 = {}; //usando{}
+    aluno2.ra = '1234567890';
+    aluno2['nome'] = 'Enzo';
+    alert(`O aluno ${aluno2.nome} tem o RA ${aluno2.ra}`);
+    aluno2["email do aluno"] = "enzo@gmail.com";
+    alert(aluno2["email do aluno"]);
+
+
+    alert(`Aluno 3`);
+    var aluno3 = {
+        nome: 'José',
+        ra: '1234567890', //vírgula opcional
+    };
+    alert(`O aluno ${aluno3.nome} tem o RA ${aluno3.ra}`);
+
+
+    alert(`Aluno 4`);
+    function Aluno(nome, ra) {
+        this.nome = nome;
+        this.ra = ra;
+        this.MostraDados = function() {
+            return `O aluno ${this.nome} tem o RA ${this.ra}`;
+        }
+    }
+    var aluno4 = new Aluno('Lucas', '1234567890');
+    alert(aluno4.MostraDados());
+
+    function Aluno2() {
+        var ra; //variável privada (encapsulamento)
+        var nome; //variável privada (encapsulamento)
+        this.setRa = function(value) { //método público (encapsulamento)
+            ra = value;
+        }
+        this.setNome = function(value) { //método público (encapsulamento)
+            nome = value;
+        }
+        this.getRa = function() { //método público (encapsulamento)
+            return ra;
+        }
+        this.getNome = function() { //método público (encapsulamento)
+            return nome;
+        }
+    }
+
+    alert(`Aluno 5`);
+    var aluno5 = new Aluno2();
+    aluno5.setRa('1234567890');
+    aluno5.setNome('Pedro');
+    alert(`O aluno ${aluno5.getNome()} tem o RA ${aluno5.getRa()}`);
+
+    alert(`Aluno 6`);
+    var aluno6 = new Aluno2();
+    aluno6.setRa('1234567890');
+    aluno6.setNome('Pedro');
+    alert(`O aluno ${aluno6.getNome()} tem o RA ${aluno6.getRa()}`);
+
+
+    alert(`Aluno 7`); //herança
+    function AlunoADS(){
+        var numLab;
+        this.setNumLab = function(value) {
+            numLab = value;
+        }
+        this.getNumLab = function() {
+            return numLab;
+        }
+    }
+
+    AlunoADS.prototype = new Aluno2();
+
+    var aluno7 = new AlunoADS();
+    aluno7.setRa('1234567890');
+    aluno7.setNome('Murilo');
+    aluno7.setNumLab('5');
+    alert(`O aluno ${aluno7.getNome()} tem o RA ${aluno7.getRa()} e o número do laboratório é ${aluno7.getNumLab()}`);
+
+    alert(`Aluno 8`);
+    //usando class
+    class Aluno1{
+        constructor(){
+            this.nome = '';
+            this.ra = '';
+            this.numLab = '';
+        }
+        setNome(nome){
+            this.nome = nome;
+        }
+        setRa(ra){
+            this.ra = ra;
+        }
+        setNumLab(numLab){
+            this.numLab = numLab;
+        }
+        getNome(){
+            return this.nome;
+        }
+        getRa(){
+            return this.ra;
+        }
+    }
+    var objAluno = new Aluno1();
+    objAluno.setNome('Daniel');
+    objAluno.setRa('1234567890');
+    objAluno.setNumLab('5');
+    alert(`O aluno ${objAluno.getNome()} tem o RA ${objAluno.getRa()}`);
+
+    alert(`Aluno 9`);
+    //herança
+    class AlunoADS1 extends Aluno1{
+        constructor(){
+            //super chama o construtor da classe pai
+            super();
+            this.numLab = '';
+        }
+        setNumLab(numLab){
+            this.numLab = numLab;
+        }
+        getNumLab(){
+            return this.numLab;
+        }
+    }
+    var objAlunoADS = new AlunoADS1();
+    objAlunoADS.setNome('Richard');
+    objAlunoADS.setRa('0031432612024');
+    objAlunoADS.setNumLab('6');
+    alert(`O aluno ${objAlunoADS.getNome()} tem o RA ${objAlunoADS.getRa()} e o número do laboratório é ${objAlunoADS.getNumLab()}`);
+
+    //OUTROS
+
+    alert(`Cópia de objeto`);
+    //cópia de objeto
+    var obj1 = new Object();
+    var obj2 = obj1;
+    obj1.nome = 'Camila';
+    alert(obj2.nome);
+
+    // métodos e atributos - públicos e privados
+    class ContaBancaria{
+        #cpf //atributo privado
+
+        constructor(nome, saldoInicial){
+            this.nome = nome; //atributo público
+            this.saldo = saldoInicial;
+        }
+
+        setCpf(value){
+            this.#cpf = value;
+        }
+        getCpf(){
+            return this.#cpf;
+        }
+
+        getSaldo(){
+            return this.saldo;
+        }
+
+        //método público
+        depositar(valor){
+            this.saldo += valor;
+            this.#registrarTransacao(valor);
+            // utilizando o modificador # para metodo privado
+        }
+
+        //método privado
+        #registrarTransacao(valor){
+            console.log(`Depósito de R$ ${valor}, realizado pelo ${this.nome} e o Saldo R$ ${this.saldo} para cpf ${this.getCpf()} ou ${this.#cpf}`);
+        }   
+    }
+
+    const conta = new ContaBancaria("Gustavo", 1000);
+    conta.setCpf(123);
+    conta.depositar(500);
+
+</script>
+</html>

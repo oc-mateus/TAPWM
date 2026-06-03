@@ -1,0 +1,552 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --tapwm-bg: #f5f7fb;
+    --tapwm-bg-soft: #eaf0f7;
+    --tapwm-surface: #ffffff;
+    --tapwm-surface-muted: #eef4f8;
+    --tapwm-ink: #17202a;
+    --tapwm-muted: #667085;
+    --tapwm-border: #d6dee8;
+    --tapwm-primary: #2563eb;
+    --tapwm-primary-dark: #1d4ed8;
+    --tapwm-teal: #0f766e;
+    --tapwm-green: #047857;
+    --tapwm-amber: #b45309;
+    --tapwm-rose: #be123c;
+    --tapwm-shadow: 0 18px 45px rgba(23, 32, 42, 0.12);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    letter-spacing: 0 !important;
+}
+
+html {
+    background: var(--tapwm-bg);
+    color-scheme: light;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--tapwm-ink) !important;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.08), transparent 32%),
+        linear-gradient(180deg, var(--tapwm-bg), var(--tapwm-bg-soft)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(23, 32, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 32, 42, 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent 78%);
+}
+
+.bg-orbs,
+.orb {
+    display: none !important;
+}
+
+.app,
+.card,
+.func-card,
+.exercise-card,
+.form-panel,
+.result-filled,
+.result-empty,
+.result-banner,
+.panel,
+.ref-table-box,
+.formula-box,
+.alert-box,
+.tip-card,
+.stat-card,
+.score-box,
+.gender-bar,
+.sum-card,
+.result-box,
+.result-area,
+.output,
+.triangle-display,
+body > p,
+body > ul {
+    background: rgba(255, 255, 255, 0.94) !important;
+    border: 1px solid var(--tapwm-border) !important;
+    border-radius: 8px !important;
+    color: var(--tapwm-ink) !important;
+    box-shadow: var(--tapwm-shadow) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.app,
+.card,
+.func-card,
+.exercise-card,
+.form-panel,
+.result-filled,
+.result-empty {
+    padding: 28px !important;
+}
+
+.page-wrapper,
+.header-inner,
+.site-header,
+.container,
+.page-header,
+.info-section,
+.medical-alert {
+    background: transparent !important;
+}
+
+.site-header,
+.calc-row,
+.info-sections,
+.container,
+.grid,
+.exercises {
+    position: relative;
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+.site-header h1,
+.section-title,
+.logo h1,
+.page-header h1,
+.result-imc-value,
+.stat-value,
+.score-num,
+.score-num-center,
+.generated-word {
+    color: var(--tapwm-ink) !important;
+    background: none !important;
+    -webkit-text-fill-color: currentColor !important;
+    text-shadow: none !important;
+}
+
+h1,
+.site-header h1,
+.page-header h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.1 !important;
+    font-weight: 800 !important;
+}
+
+h2,
+.card-title h2,
+.card-header h2,
+.section-title {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+}
+
+p,
+li,
+label,
+.subtitle,
+.tagline,
+.card-desc,
+.section-body,
+.section-body p,
+.result-description,
+.empty-text,
+.ref-name,
+.ref-range,
+.rec-text,
+.alert-text,
+.tip-card ul,
+.info-label,
+.word-meta,
+.score-name,
+.score-name-center,
+.field-label,
+.field-error,
+.nav-link,
+.mobile-link {
+    color: var(--tapwm-muted) !important;
+}
+
+strong,
+.result-label,
+.result-value,
+.info-value,
+.stat-label,
+.field-label,
+.ref-table-title,
+.section-tag,
+.alert-tag,
+.formula-label {
+    color: var(--tapwm-ink) !important;
+}
+
+input,
+select,
+textarea,
+.input-wrapper input {
+    width: 100%;
+    color: var(--tapwm-ink) !important;
+    background: var(--tapwm-surface) !important;
+    border: 1px solid var(--tapwm-border) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.input-wrapper input:focus {
+    border-color: var(--tapwm-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #98a2b3 !important;
+}
+
+select option {
+    background: var(--tapwm-surface) !important;
+    color: var(--tapwm-ink) !important;
+}
+
+button,
+.btn,
+.game-btn,
+.info-btn,
+.btn-calcular {
+    color: #ffffff !important;
+    background: var(--tapwm-primary) !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    font-weight: 700 !important;
+    transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+button:hover,
+.btn:hover,
+.game-btn:hover,
+.info-btn:hover,
+.btn-calcular:hover {
+    color: #ffffff !important;
+    background: var(--tapwm-primary-dark) !important;
+    border-color: var(--tapwm-primary-dark) !important;
+    transform: translateY(-1px) !important;
+}
+
+button:active,
+.btn:active,
+.game-btn:active,
+.info-btn:active,
+.btn-calcular:active {
+    transform: translateY(0) !important;
+}
+
+.btn-relatorio,
+.btn-emerald,
+.btn-green,
+.btn-cyan {
+    background: var(--tapwm-teal) !important;
+}
+
+.btn-relatorio:hover,
+.btn-emerald:hover,
+.btn-green:hover,
+.btn-cyan:hover {
+    background: #115e59 !important;
+}
+
+.btn-orange,
+.btn-amber {
+    background: var(--tapwm-amber) !important;
+}
+
+.btn-orange:hover,
+.btn-amber:hover {
+    background: #92400e !important;
+}
+
+.btn-rose,
+.btn-pink,
+.info-btn.reset,
+.panel-close {
+    background: var(--tapwm-rose) !important;
+}
+
+.btn-rose:hover,
+.btn-pink:hover,
+.info-btn.reset:hover,
+.panel-close:hover {
+    background: #9f1239 !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#navbar,
+.mobile-menu {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-bottom: 1px solid var(--tapwm-border) !important;
+    box-shadow: 0 10px 30px rgba(23, 32, 42, 0.08) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+.nav-logo,
+.nav-logo span,
+.nav-link:hover,
+.nav-link.active,
+.mobile-link:hover,
+.mobile-link.active {
+    color: var(--tapwm-ink) !important;
+}
+
+.nav-link::after {
+    background: var(--tapwm-primary) !important;
+}
+
+.header-badge,
+.result-label-top,
+.section-tag,
+.formula-label,
+.alert-tag,
+.stat-label,
+.side-label,
+.sum-label {
+    text-transform: uppercase;
+    color: var(--tapwm-primary) !important;
+}
+
+.progress-track,
+.progress-bar,
+.input-wrapper,
+.triangle-canvas-wrap,
+.result-bar-section,
+.info-table tbody tr:hover,
+.empty-icon-box,
+.tip-icon {
+    background: var(--tapwm-surface-muted) !important;
+    border-color: var(--tapwm-border) !important;
+}
+
+.progress-fill {
+    background: var(--tapwm-primary) !important;
+}
+
+.seg-blue,
+.dot-blue {
+    background: #60a5fa !important;
+}
+
+.seg-green,
+.dot-green {
+    background: #22c55e !important;
+}
+
+.seg-yellow,
+.dot-yellow {
+    background: #f59e0b !important;
+}
+
+.seg-red,
+.dot-red {
+    background: #ef4444 !important;
+}
+
+.progress-indicator,
+.indicator-diamond,
+.empty-dot,
+.tip-dot {
+    background: var(--tapwm-ink) !important;
+}
+
+.arena-hand,
+canvas {
+    background: var(--tapwm-surface-muted) !important;
+    border: 1px solid var(--tapwm-border) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.game-btn::before,
+.btn-overlay {
+    display: none !important;
+}
+
+.btn-emoji,
+.card-icon,
+.header-icon,
+.rule-emoji,
+.logo-icon {
+    filter: saturate(0.85);
+}
+
+.btn-key,
+.result-highlight,
+.hr-tag,
+.num-tag,
+.status-aprovado,
+.status-reprovado {
+    border-radius: 6px !important;
+    background: var(--tapwm-surface-muted) !important;
+    color: var(--tapwm-ink) !important;
+    border: 1px solid var(--tapwm-border) !important;
+}
+
+.aprovado,
+.status-aprovado,
+.alert-success,
+.badge-equilatero,
+.tag-win,
+.sum-purple {
+    background: #ecfdf3 !important;
+    border-color: #abefc6 !important;
+    color: #067647 !important;
+}
+
+.reprovado,
+.status-reprovado,
+.alert-error,
+.badge-invalido,
+.tag-lose {
+    background: #fff1f3 !important;
+    border-color: #fecdd3 !important;
+    color: #be123c !important;
+}
+
+.badge-isosceles,
+.gender-m,
+.gender-f,
+.gender-o {
+    background: #eff6ff !important;
+    border-color: #bfdbfe !important;
+    color: #1d4ed8 !important;
+}
+
+.badge-escaleno,
+.tag-draw,
+.sum-orange {
+    background: #fffbeb !important;
+    border-color: #fde68a !important;
+    color: #b45309 !important;
+}
+
+.accent-green,
+.range-green {
+    color: #047857 !important;
+}
+
+.accent-red,
+.range-red {
+    color: #be123c !important;
+}
+
+.accent-purple,
+.accent-pink,
+.range-blue {
+    color: #1d4ed8 !important;
+}
+
+.accent-amber,
+.range-yellow {
+    color: #b45309 !important;
+}
+
+.info-table {
+    background: var(--tapwm-surface) !important;
+    border: 1px solid var(--tapwm-border) !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.info-table th,
+.info-table td,
+.series-table th,
+.series-table td,
+.ref-row,
+.info-row,
+.history-row,
+.rule-item {
+    border-color: var(--tapwm-border) !important;
+    color: var(--tapwm-ink) !important;
+}
+
+body > h1:first-child,
+body > h2:first-child {
+    max-width: 760px;
+    margin: 48px auto 16px !important;
+    padding: 0 20px;
+    text-align: center;
+}
+
+body > p,
+body > ul {
+    max-width: 760px;
+    margin: 0 auto 14px !important;
+    padding: 18px 20px !important;
+    line-height: 1.65;
+}
+
+body > ul {
+    padding-left: 38px !important;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    h1,
+    .site-header h1,
+    .page-header h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .app,
+    .card,
+    .func-card,
+    .exercise-card,
+    .form-panel,
+    .result-filled,
+    .result-empty {
+        padding: 20px !important;
+    }
+
+    .grid,
+    .result-grid,
+    .tips-grid,
+    .limitations-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .input-row,
+    .form-row,
+    .btn-group,
+    .buttons,
+    .scores,
+    .gender-bars {
+        flex-direction: column !important;
+    }
+
+    .sides-input,
+    .notas-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

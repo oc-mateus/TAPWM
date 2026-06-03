@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 11</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/tapwm-theme.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Atividade 11</h1>
+
+        <section class="card">
+            <h2>Retângulo (função construtora)</h2>
+            <p>Informe a base e a altura:</p>
+            <label>Base (x): <input type="number" id="ret-base" min="0" step="any" placeholder="Ex: 10"></label>
+            <label>Altura (y): <input type="number" id="ret-altura" min="0" step="any" placeholder="Ex: 5"></label>
+            <button type="button" id="btn-retangulo">Calcular área</button>
+            <div id="output-retangulo" class="output"></div>
+        </section>
+
+        <section class="card">
+            <h2>Conta Corrente</h2>
+            <label>Nome do correntista: <input type="text" id="cc-nome"></label>
+            <label>Banco: <input type="text" id="cc-banco"></label>
+            <label>Número da conta: <input type="text" id="cc-numero"></label>
+            <label>Saldo: <input type="number" id="cc-saldo" step="0.01"></label>
+            <label>Saldo especial: <input type="number" id="cc-especial" step="0.01"></label>
+            <button type="button" id="btn-corrente">Exibir dados</button>
+            <div id="output-corrente" class="output"></div>
+        </section>
+
+        <section class="card">
+            <h2>Conta Poupança</h2>
+            <label>Nome do correntista: <input type="text" id="cp-nome"></label>
+            <label>Banco: <input type="text" id="cp-banco"></label>
+            <label>Número da conta: <input type="text" id="cp-numero"></label>
+            <label>Saldo: <input type="number" id="cp-saldo" step="0.01"></label>
+            <label>Juros (%): <input type="number" id="cp-juros" step="0.01" min="0"></label>
+            <label>Data de vencimento: <input type="date" id="cp-vencimento"></label>
+            <button type="button" id="btn-poupanca">Exibir dados</button>
+            <div id="output-poupanca" class="output"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

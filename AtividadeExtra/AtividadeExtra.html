@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Extra</title>
+    <link rel="stylesheet" href="../assets/tapwm-theme.css">
+</head>
+<body>
+    <h1>Atividade Extra</h1>
+    <p>Cinco objetos (pessoa1 a pessoa5) criados de formas diferentes em JavaScript.</p>
+    <p>Cada objeto possui: <strong>nome</strong>, <strong>idade</strong>, <strong>hobby</strong> e o método <strong>apresentar()</strong>.</p>
+    <ul>
+        <li><strong>pessoa1</strong> — literal de objeto</li>
+        <li><strong>pessoa2</strong> — new Object()</li>
+        <li><strong>pessoa3</strong> — função construtora</li>
+        <li><strong>pessoa4</strong> — classe</li>
+        <li><strong>pessoa5</strong> — Object.create()</li>
+    </ul>
+    <p>As apresentações são exibidas em alert ao carregar a página.</p>
+</body>
+
+<script>
+    function textoApresentacao(nome, idade, hobby) {
+        return `Olá, meu nome é ${nome}, tenho ${idade} anos e meu hobby é ${hobby}`;
+    }
+
+    alert('pessoa1 — Literal de objeto');
+    var pessoa1 = {
+        nome: 'João',
+        idade: 20,
+        hobby: 'tocar violão',
+        apresentar: function () {
+            return textoApresentacao(this.nome, this.idade, this.hobby);
+        }
+    };
+    alert(pessoa1.apresentar());
+
+    alert('pessoa2 — new Object()');
+    var pessoa2 = new Object();
+    pessoa2.nome = 'Maria';
+    pessoa2.idade = 25;
+    pessoa2.hobby = 'ler livros';
+    pessoa2.apresentar = function () {
+        return textoApresentacao(this.nome, this.idade, this.hobby);
+    };
+    alert(pessoa2.apresentar());
+
+    alert('pessoa3 — Função construtora');
+    function Pessoa(nome, idade, hobby) {
+        this.nome = nome;
+        this.idade = idade;
+        this.hobby = hobby;
+        this.apresentar = function () {
+            return textoApresentacao(this.nome, this.idade, this.hobby);
+        };
+    }
+    var pessoa3 = new Pessoa('Pedro', 30, 'jogar futebol');
+    alert(pessoa3.apresentar());
+
+    alert('pessoa4 — Classe');
+    class PessoaClasse {
+        constructor(nome, idade, hobby) {
+            this.nome = nome;
+            this.idade = idade;
+            this.hobby = hobby;
+        }
+        apresentar() {
+            return textoApresentacao(this.nome, this.idade, this.hobby);
+        }
+    }
+    var pessoa4 = new PessoaClasse('Ana', 22, 'pintar');
+    alert(pessoa4.apresentar());
+
+    alert('pessoa5 — Object.create()');
+    var prototipoPessoa = {
+        apresentar: function () {
+            return textoApresentacao(this.nome, this.idade, this.hobby);
+        }
+    };
+    var pessoa5 = Object.create(prototipoPessoa);
+    pessoa5.nome = 'Lucas';
+    pessoa5.idade = 28;
+    pessoa5.hobby = 'cozinhar';
+    alert(pessoa5.apresentar());
+</script>
+</html>
