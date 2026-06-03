@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 13 - Usando DOM</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/tapwm-theme.css">
+</head>
+<body>
+    <main class="activity-shell">
+        <section class="activity-card">
+            <p class="eyebrow">TAPWM - Atividade 13</p>
+            <h1>Transformador de Texto</h1>
+            <p class="subtitle">Digite um texto e escolha se ele deve ficar em letras maiúsculas ou minúsculas.</p>
+
+            <form id="formularioTexto" name="formularioTexto">
+                <label for="textoUsuario">Texto</label>
+                <input
+                    type="text"
+                    id="textoUsuario"
+                    name="textoUsuario"
+                    placeholder="Ex: Boa noite turma"
+                    autocomplete="off"
+                >
+
+                <fieldset>
+                    <legend>Escolha a transformação</legend>
+
+                    <label class="radio-option" for="maiusculas">
+                        <input type="radio" id="maiusculas" name="tipoTransformacao" value="maiusculas">
+                        Letras maiúsculas
+                    </label>
+
+                    <label class="radio-option" for="minusculas">
+                        <input type="radio" id="minusculas" name="tipoTransformacao" value="minusculas">
+                        Letras minúsculas
+                    </label>
+                </fieldset>
+
+                <button type="button" onclick="transformarTexto()">Transformar</button>
+                <button type="reset" class="secondary-button" onclick="limparResultado()">Limpar</button>
+            </form>
+
+            <div id="mensagem" class="message" aria-live="polite"></div>
+            <div id="resultado" class="result-box"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

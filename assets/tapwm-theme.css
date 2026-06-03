@@ -220,6 +220,12 @@ textarea::placeholder {
     color: #98a2b3 !important;
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto !important;
+    accent-color: var(--tapwm-primary);
+}
+
 select option {
     background: var(--tapwm-surface) !important;
     color: var(--tapwm-ink) !important;
