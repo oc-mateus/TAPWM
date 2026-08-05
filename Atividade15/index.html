@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos - Fatec Sorocaba</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="panel">
+    <h1>Cursos da Fatec Sorocaba</h1>
+
+    <div class="content">
+      <label for="cursos">Selecione um curso:</label>
+      <select id="cursos" onchange="abrirCurso(this)">
+        <option value="">-- Escolha um curso --</option>
+        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+        <option value="ge">Gestão Empresarial</option>
+        <option value="fabricacao">Projetos, Estruturas e Geoprocessamento</option>
+        <option value="sistemas">Sistemas Biomédicos</option>
+        <option value="manutencao">Manufatura Avançada</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
